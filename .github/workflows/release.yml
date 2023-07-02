@@ -7,6 +7,8 @@ on:
         description: "tag name"
         required: true
 
+permissions:
+  contents: write
  
 jobs:
   build:
@@ -38,7 +40,6 @@ jobs:
       if: runner.os == 'MacOS'
       run: |
         mv src-rust/target/release/libhello.dylib libhello_x86_64.dylib
-        ls -la
 
     - name: Release MacOS lib2
       if: runner.os == 'MacOS'
