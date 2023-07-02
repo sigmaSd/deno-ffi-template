@@ -76,13 +76,9 @@ export class Hello {
   hello(world: World): World {
     const newWorld = this.#lib.symbols.hello(
       this.#this,
-      encode(
-        world,
-      ),
+      encode(world),
     ) as Deno.PointerValue; /* non blocking is set to false */
     if (!newWorld) throw new Error("hello failed");
-    return decode(
-      newWorld,
-    );
+    return decode(newWorld);
   }
 }

@@ -38,7 +38,7 @@ pub extern "C" fn create() -> *const Mutex<HelloStruct> {
 #[no_mangle]
 /// # Safety
 /// expects
-/// - valid ptr to an Arc<Mutex<HelloStruct>> and a valid ptr
+/// - valid ptr to an Arc<Mutex<HelloStruct>>
 /// - valid ptr to a World struct encoded as CString encoding a JSON value
 /// returns a World struct encoded as CString encoding a JSON value
 pub unsafe extern "C" fn hello(this: *const Mutex<HelloStruct>, world: *mut i8) -> *mut i8 {
