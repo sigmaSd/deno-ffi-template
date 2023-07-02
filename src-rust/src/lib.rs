@@ -1,10 +1,10 @@
+use serde::{Deserialize, Serialize};
 use std::{
     ffi::CString,
     mem::ManuallyDrop,
     sync::{Arc, Mutex, MutexGuard},
 };
 mod utils;
-use serde::{Deserialize, Serialize};
 use utils::cstr_to_type;
 
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
