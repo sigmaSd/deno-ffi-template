@@ -29,3 +29,7 @@ To use it go to `Actions`, then click `Releas libs` (on the left), then click
 `src/mod.ts` so it can be picked up by the module.
 
 Thats it now when you use `deno task run` it should use this published library.
+
+## Details
+
+- The ffi between rust and deno is using json values encoded as Cstrings
