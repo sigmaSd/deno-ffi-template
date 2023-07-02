@@ -12,4 +12,3 @@
     "fmt": "deno fmt; cd src-rust; cargo fmt"
   }
 }
-
