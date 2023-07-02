@@ -7,7 +7,7 @@ mod utils;
 use serde::{Deserialize, Serialize};
 use utils::cstr_to_type;
 
-type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
+pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 #[derive(Serialize, Deserialize)]
 struct World {
@@ -22,11 +22,10 @@ impl HelloStruct {
     fn hello(&self, world: World) -> World {
         println!("[rust] the world is big: {}", world.size);
         println!("[rust] take an even bigger world");
-        let new_world = World {
-            size: world.size + 1,
-        };
 
-        new_world
+        World {
+            size: world.size + 1,
+        }
     }
 }
 
@@ -48,7 +47,8 @@ pub unsafe extern "C" fn hello(this: *const Mutex<HelloStruct>, world: *mut i8) 
 
     // useful inner function that returns a result so we can use `?`
     fn result_wrap(this: MutexGuard<HelloStruct>, world: *mut i8) -> Result<*mut i8> {
-        let world: World = cstr_to_type(world)?;
+        //SAFETY: world is valid by the guarentee of the parent function
+        let world: World = unsafe { cstr_to_type(world)? };
 
         // inner function that have everything typed explicitly instead of pointers
         fn type_wrap(this: MutexGuard<HelloStruct>, world: World) -> World {
