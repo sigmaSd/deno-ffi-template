@@ -19,6 +19,13 @@ deno task dev
 deno task run
 ```
 
+## Notes
+
+- If you have created a new repo, the repo url inside `src/mod.ts` needs to
+  change to match the repo you're using
+- When you change the rust library name, remember to also change the name in the
+  github workflow (just grep for hello)
+
 ## Publishing a rust library with github action
 
 The repo comes with a workflow that builds the rust library for
@@ -30,6 +37,6 @@ To use it go to `Actions`, then click `Releas libs` (on the left), then click
 
 Thats it now when you use `deno task run` it should use this published library.
 
-## Details
+## Technical Details
 
 - The ffi between rust and deno is using json values encoded as Cstrings
