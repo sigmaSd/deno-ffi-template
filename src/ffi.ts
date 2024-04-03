@@ -10,7 +10,6 @@ const SYMBOLS = {
   hello: {
     parameters: ["pointer", "buffer", "buffer"],
     result: "i8",
-    nonblocking: false,
   },
 } satisfies Deno.ForeignLibraryInterface;
 
