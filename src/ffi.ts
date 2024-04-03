@@ -1,4 +1,5 @@
 import * as plug from "@denosaurs/plug";
+import { version } from "../version.ts";
 
 export interface World {
   size: number;
@@ -16,7 +17,6 @@ const SYMBOLS = {
 export const LIBRARY = await instantiate();
 async function instantiate() {
   const name = "hello";
-  const version = "0.1.0";
   // NOTE: replace this url with the correct repo url
   const url =
     `https://github.com/sigmaSd/deno-ffi-template/releases/download/${version}`;

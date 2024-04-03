@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
-use std::{ffi::CString, mem::ManuallyDrop};
+use std::ffi::CString;
 mod utils;
-use utils::{cstr_json_to_type, type_to_json_cstr};
+use utils::{boxed_error_to_cstring, cstr_json_to_type, type_to_json_cstr};
 
 pub type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
@@ -39,7 +39,7 @@ pub extern "C" fn create() -> *const HelloStruct {
 /// - - an error encoded as CString
 /// ->  returns 0 on success and -1 on error
 pub unsafe extern "C" fn hello(this: *mut HelloStruct, world: *mut i8, result: *mut usize) -> i8 {
-    let this = ManuallyDrop::new(Box::from_raw(this));
+    let this = unsafe { &mut *this };
     #[allow(clippy::blocks_in_conditions)]
     match (|| -> Result<CString> {
         //SAFETY: world is valid by the guarentee of the parent function
@@ -51,9 +51,7 @@ pub unsafe extern "C" fn hello(this: *mut HelloStruct, world: *mut i8, result: *
             0
         }
         Err(err) => {
-            *result = CString::new(err.to_string())
-                .expect("err is valid cstring")
-                .into_raw() as _;
+            *result = boxed_error_to_cstring(err).into_raw() as _;
             -1
         }
     }
