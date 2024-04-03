@@ -1,11 +1,9 @@
 name: Release libs
 
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: "tag name"
-        required: true
+  push:
+    tags:
+      - '*'
 
 permissions:
   contents: write
@@ -46,7 +44,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         file: libhello_x86_64.dylib
-        tag: ${{ github.event.inputs.tag }}
+        tag: ${{ github.ref }}
         overwrite: true
 
     - name: Install cargo-zigbuild
@@ -66,7 +64,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         file: libhello_aarch64.dylib
-        tag: ${{ github.event.inputs.tag }}
+        tag: ${{ github.ref }}
         overwrite: true
 
     - name: Release Linux lib
@@ -74,7 +72,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         file: src-rust/target/release/libhello.so
-        tag: ${{ github.event.inputs.tag }}
+        tag: ${{ github.ref }}
         overwrite: true
 
     - name: Release Windows lib
@@ -82,5 +80,5 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         file: src-rust/target/release/hello.dll
-        tag: ${{ github.event.inputs.tag }}
+        tag: ${{ github.ref }}
         overwrite: true

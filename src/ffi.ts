@@ -11,18 +11,15 @@ const SYMBOLS = {
     result: "i8",
     nonblocking: false,
   },
-} as const;
+} satisfies Deno.ForeignLibraryInterface;
 
 export const LIBRARY = await instantiate();
 async function instantiate() {
   const name = "hello";
-  // Tag version with the prebuilt lib
-  // It doesn't have to be the same as the library version
-  // Only update it when the rust library gets updated
   const version = "0.1.0";
   // NOTE: replace this url with the correct repo url
   const url =
-    `https://github.com/sigmaSd/scaffold-plug/releases/download/${version}`;
+    `https://github.com/sigmaSd/deno-ffi-template/releases/download/${version}`;
 
   return await plug.dlopen(
     {

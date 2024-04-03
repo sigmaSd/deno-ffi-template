@@ -25,9 +25,7 @@ Run `deno task` to see the many more available commands.
 The repo comes with a workflow that builds the rust library for
 linux,windows,macos(x86+arm)
 
-To use it go to `Actions`, then click `Releas libs` (on the left), then click
-`Run workflow`. Set the tag name, the tag should match what you're using inside
-`src/mod.ts` so it can be picked up by the module.
+To use it create a new tag and push it, and it should automaticly compile the rust lib and upload it to the github releases.
 
 ## Technical Details
 
