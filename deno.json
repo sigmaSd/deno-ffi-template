@@ -1,7 +1,7 @@
 {
   "name": "Hello",
   "exports": "./src/mod.ts",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "tasks": {
     "build": "cargo build --manifest-path src-rust/Cargo.toml",
     "dev": "deno task build && deno task dev:fast",
@@ -13,6 +13,6 @@
     "test:deno": "deno task build && export RUST_LIB_PATH=$CARGO_TARGET_DIR/debug && deno test --unstable-ffi -A"
   },
   "imports": {
-    "@denosaurs/plug": "jsr:@denosaurs/plug@1.0.5"
+    "@denosaurs/plug": "jsr:@denosaurs/plug@1.0.6"
   }
 }
