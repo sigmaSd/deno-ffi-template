@@ -1,7 +1,7 @@
 {
   "name": "Hello",
   "exports": "./src/mod.ts",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "tasks": {
     "build": "cargo build --manifest-path src-rust/Cargo.toml",
     "dev": "deno task build && deno task dev:fast",
