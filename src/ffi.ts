@@ -1,5 +1,5 @@
 import * as plug from "@denosaurs/plug";
-import { version } from "../version.ts";
+import metadata from "../deno.json" with { type: "json" };
 
 export interface World {
   size: number;
@@ -18,7 +18,7 @@ async function instantiate() {
   const name = "hello";
   // NOTE: replace this url with the correct repo url
   const url =
-    `https://github.com/sigmaSd/deno-ffi-template/releases/download/${version}`;
+    `https://github.com/sigmaSd/deno-ffi-template/releases/download/${metadata.version}`;
 
   return await plug.dlopen(
     {
